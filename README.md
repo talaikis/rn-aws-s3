@@ -5,11 +5,45 @@ React Native AWS S3 client (some utils)
 ## Installation
 
 ```sh
-npm install rn-aws-s3
+yarn add rn-aws-s3
+```
+
+Build dependency:
+
+```
+implementation(platform("software.amazon.awssdk:bom:2.27.21"))
+```
+
+Build fixes, if required:
+
+```
+packagingOptions {
+  exclude "META-INF/DEPENDENCIES"
+  exclude "META-INF/LICENSE"
+  exclude "META-INF/LICENSE.txt"
+  exclude "META-INF/license.txt"
+  exclude "META-INF/NOTICE"
+  exclude "META-INF/NOTICE.txt"
+  exclude "META-INF/notice.txt"
+  exclude "META-INF/ASL2.0"
+  exclude "META-INF/INDEX.LIST"
+  pickFirst "META-INF/io.netty.versions.properties"
+}
+```
+
+Proguard rules
+
+```
+-keep class org.apache.commons.logging.**               { *; }
+-keep class com.amazonaws.services.sqs.QueueUrlHandler  { *; }
+-keep class com.amazonaws.javax.xml.transform.sax.*     { public *; }
+-keep class com.amazonaws.javax.xml.stream.**           { *; }
+-keep class com.amazonaws.services.**.model.*Exception* { *; }
+-keep class org.codehaus.**                             { *; }
+-keepattributes Signature,*Annotation*
 ```
 
 ## Usage
-
 
 ```js
 import { putObject } from 'rn-aws-s3';
